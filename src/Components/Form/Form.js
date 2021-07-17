@@ -12,6 +12,7 @@ const Form = () => {
   const [longitude, setLongitude] = useState('')
   const [latitude, setLatitude] = useState('')
   const ref = useRef()
+  let fullURL
 
   const onSelectChangeHandler = e => {
     const getDate = e.target.value
@@ -23,26 +24,20 @@ const Form = () => {
 
     setInput(input)
     console.log(input)
-  }
-  const location = input
 
-  const getFullUrl = () => {
+    const location = input
+
     Geocode.fromAddress(location).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location
         setLatitude(lat)
         setLongitude(lng)
-        console.log(input)
+        console.log(date, lng, lat)
       },
       error => {
         console.error(error)
       }
     )
-  }
-  let fullURL
-
-  if (date && latitude && longitude) {
-    fullURL = `https://data.police.uk/api/crimes-at-location?date=${date}&lat=${latitude}&lng=${longitude}`
   }
 
   console.log(fullURL)
@@ -85,20 +80,26 @@ const Form = () => {
             <option value='2020-10'>Oct 2020</option>
             <option value='2020-11'>Nov 2020</option>
             <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
-            <option value='2020-12'>Dec 2020</option>
+            <option value='2021-01'>Jan 2021</option>
+            <option value='2021-02'>Feb 2020</option>
+            <option value='2021-03'>Mar 2020</option>
+            <option value='2001-04'>Apr 2020</option>
+            <option value='2021-05'>May 2020</option>
+            <option value='2021-06'>Jun 2020</option>
           </select>
 
-          <button className={classes.formButton} onClick={getFullUrl}>
+          <button
+            className={classes.formButton}
+            fullURL={fullURL}
+            longitude={longitude}
+            latitude={latitude}
+            date={date}
+          >
             Get Crime Report
           </button>
         </form>
       </div>
-      <PoliceApi onSetUrl={fullURL} />
+      <PoliceApi />
     </Fragment>
   )
 }
