@@ -6,6 +6,7 @@ const CrimeChart = API => {
   const total = A + B + C + D + E + F + G + H + I + J + K + L + M + N
 
   const letter = [A, B, C, D, E, F, G, H, I, J, K, L, M, N]
+
   let percentage = []
 
   let num = 0
@@ -31,6 +32,24 @@ const CrimeChart = API => {
   const width13 = { width: `${percentage[12]}%` }
   const width14 = { width: `${percentage[13]}%` }
   console.log(width1, width2, width3)
+
+  const text1 = percentage[0].toFixed(0)
+  const text2 = percentage[1].toFixed(0)
+  const text3 = percentage[2].toFixed(0)
+  const text4 = percentage[3].toFixed(0)
+  const text5 = percentage[4].toFixed(0)
+  const text6 = percentage[5].toFixed(0)
+  const text7 = percentage[6].toFixed(0)
+  const text8 = percentage[7].toFixed(0)
+  const text9 = percentage[8].toFixed(0)
+  const text10 = percentage[9].toFixed(0)
+  const text11 = percentage[10].toFixed(0)
+  const text12 = percentage[11].toFixed(0)
+  const text13 = percentage[12].toFixed(0)
+  const text14 = percentage[13].toFixed(0)
+
+  console.log(text1)
+
   return (
     <Fragment>
       <div>
@@ -39,89 +58,89 @@ const CrimeChart = API => {
             <article className={classes.skills}>
               <div className={classes['t-6']}>
                 <p>
-                  Anti-social Behaviour
+                  {text1}% -Anti-social Behaviour
                   <span></span>
                   <span style={width1} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Bicycle Theft<span></span>
+                  {text2}% -Bicycle Theft<span></span>
                   <span style={width2} className={classes.skills}></span>
                 </p>
               </div>
 
               <div className={classes['t-6']}>
                 <p>
-                  Burglary<span></span>
+                  {text3}% -Burglary<span></span>
                   <span style={width3} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Criminal Damage Arson<span></span>
+                  {text4}% -Criminal Damage Arson<span></span>
                   <span style={width4} className={classes.skills}></span>
                 </p>
               </div>
 
               <div className={classes['t-6']}>
                 <p>
-                  Drugs<span></span>
+                  {text5}% -Drugs<span></span>
                   <span style={width5} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Other Theft<span></span>
+                  {text6}% -Other Theft<span></span>
                   <span style={width6} className={classes.skills}></span>
                 </p>
               </div>
 
               <div className={classes['t-6']}>
                 <p>
-                  Possession of Weapons<span></span>
+                  {text7}% - Possession of Weapons<span></span>
                   <span style={width7} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Public Order<span></span>
+                  {text8}% -Public Order<span></span>
                   <span style={width8} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Robbery<span></span>
+                  {text9}% - Robbery<span></span>
                   <span style={width9} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Shoplifting<span></span>
+                  {text10}% -Shoplifting<span></span>
                   <span style={width10} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Theft from the person<span></span>
+                  {text11}% -Theft from the person<span></span>
                   <span style={width11} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Vehicle crime<span></span>
+                  {text12}% -Vehicle crime<span></span>
                   <span style={width12} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Violence and sexual offences<span></span>
+                  {text13}% -Violence and sexual offences<span></span>
                   <span style={width13} className={classes.skills}></span>
                 </p>
               </div>
               <div className={classes['t-6']}>
                 <p>
-                  Other crime<span></span>
+                  {text14}% -Other crime<span></span>
                   <span style={width14} className={classes.skills}></span>
                 </p>
               </div>

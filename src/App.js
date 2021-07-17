@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from './Components/Form/Form'
-import CrimeChart from './Components/Charts/CrimeChart'
+
 import Header from './Components/Header/Header'
 
 function App () {
@@ -8,7 +8,7 @@ function App () {
     <div className='App'>
       <Header />
       <Form />
-      <CrimeChart />
+
     </div>
   )
 }

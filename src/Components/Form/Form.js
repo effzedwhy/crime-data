@@ -49,6 +49,7 @@ const Form = () => {
             Location
           </label>
           <input
+            type='text'
             placeholder='Search by location for e.g Manchester'
             className={classes.formLocationInput}
             id='location'
@@ -61,12 +62,10 @@ const Form = () => {
             className={classes.formDateSelect}
             id='date'
             onChange={onSelectChangeHandler}
+            value={date}
           >
-            <option value=''></option>
-            <option value='2020-01'>Jan 2020</option>
-            <option value='2020-02'>Feb 2020</option>
-            <option value='2020-03'>Mar 2020</option>
-            <option value='2020-04'>Apr 2020</option>
+            <option value=''>Select</option>
+
             <option value='2020-05'>May 2020</option>
             <option value='2020-06'>Jun 2020</option>
             <option value='2020-07'>Jul 2020</option>
@@ -76,14 +75,17 @@ const Form = () => {
             <option value='2020-11'>Nov 2020</option>
             <option value='2020-12'>Dec 2020</option>
             <option value='2021-01'>Jan 2021</option>
-            <option value='2021-02'>Feb 2020</option>
-            <option value='2021-03'>Mar 2020</option>
             <option value='2021-04'>Apr 2020</option>
-            <option value='2021-05'>May 2020</option>
+            <option value='2021-02'>Feb 2021</option>
+            <option value='2021-03'>Mar 2021</option>
+            <option value='2021-04'>Apr 2021</option>
+            <option value='2021-05'>May 2021</option>
             <option value='2021-06'>Jun 2020</option>
           </select>
 
-          <button className={classes.formButton}>Get Crime Report</button>
+          <button className={classes.formButton} value='submit'>
+            Get Crime Report
+          </button>
         </form>
       </div>
       <API longitude={longitude} latitude={latitude} date={date} />

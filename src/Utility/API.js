@@ -16,15 +16,15 @@ let M = 0
 let N = 0
 
 const API = ({ date, longitude, latitude }) => {
-  // const [getCrimes, setGetCrimes] = useState([])
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
 
   let url = `https://data.police.uk/api/crimes-street/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`
   console.log(date, longitude, latitude, url)
   if (!date || !longitude || !latitude) {
-    url = null
+    url = ''
   }
+  console.log(url)
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(url)
@@ -90,14 +90,14 @@ const API = ({ date, longitude, latitude }) => {
       }
 
       console.log(A, B, C, D, E, F, G, H, I, J, K, L, M, N)
-      setIsLoading(false)
     }
     try {
       getData()
     } catch (error) {
       setIsLoading(false)
       setDataError(error.message)
-    }
+
+         }
   }, [url])
 
   if (isLoading) {
@@ -118,22 +118,24 @@ const API = ({ date, longitude, latitude }) => {
 
   return (
     <div>
-      <CrimeChart
-        A={A}
-        B={B}
-        C={C}
-        D={D}
-        E={E}
-        F={F}
-        G={G}
-        H={H}
-        I={I}
-        J={J}
-        K={K}
-        L={L}
-        M={M}
-        N={N}
-      />
+      (
+        <CrimeChart
+          A={A}
+          B={B}
+          C={C}
+          D={D}
+          E={E}
+          F={F}
+          G={G}
+          H={H}
+          I={I}
+          J={J}
+          K={K}
+          L={L}
+          M={M}
+          N={N}
+        />
+      )
     </div>
   )
 }
