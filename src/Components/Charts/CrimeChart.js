@@ -1,27 +1,41 @@
 import React, { Fragment } from 'react'
 import classes from './CrimeChart.module.css'
 
-const width1 = { width: '50%' }
-const width2 = { width: '50%' }
-const width3 = { width: '50%' }
-const width4 = { width: '50%' }
-const width5 = { width: '50%' }
-const width6 = { width: '50%' }
-const width7 = { width: '50%' }
-const width8 = { width: '50%' }
-const width9 = { width: '50%' }
-const width10 = { width: '50%' }
-const width11 = { width: '50%' }
-const width12 = { width: '50%' }
-const width13 = { width: '50%' }
-const width14 = { width: '50%' }
+const CrimeChart = API => {
+  const { A, B, C, D, E, F, G, H, I, J, K, L, M, N } = API
+  const total = A + B + C + D + E + F + G + H + I + J + K + L + M + N
 
-const CrimeChart = () => {
+  const letter = [A, B, C, D, E, F, G, H, I, J, K, L, M, N]
+  let percentage = []
+
+  let num = 0
+  while (num < letter.length) {
+    percentage.push((letter[num] / total) * 100)
+    num++
+  }
+
+  console.log(total, A)
+
+  const width1 = { width: `${percentage[0]}%` }
+  const width2 = { width: `${percentage[1]}%` }
+  const width3 = { width: `${percentage[2]}%` }
+  const width4 = { width: `${percentage[3]}%` }
+  const width5 = { width: `${percentage[4]}%` }
+  const width6 = { width: `${percentage[5]}%` }
+  const width7 = { width: `${percentage[6]}%` }
+  const width8 = { width: `${percentage[7]}%` }
+  const width9 = { width: `${percentage[8]}%` }
+  const width10 = { width: `${percentage[9]}%` }
+  const width11 = { width: `${percentage[10]}%` }
+  const width12 = { width: `${percentage[11]}%` }
+  const width13 = { width: `${percentage[12]}%` }
+  const width14 = { width: `${percentage[13]}%` }
+  console.log(width1, width2, width3)
   return (
     <Fragment>
       <div>
         <main>
-          <section id='skills' >
+          <section id='skills'>
             <article className={classes.skills}>
               <div className={classes['t-6']}>
                 <p>

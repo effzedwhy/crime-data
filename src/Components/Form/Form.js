@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState } from 'react'
 import classes from './Form.module.css'
 import Geocode from 'react-geocode'
-import PoliceApi from '../../Utility/PoliceApi'
+import API from '../../Utility/API'
 Geocode.setApiKey('AIzaSyChf1wATZBL2PSzvuQxRZ1NkrMkiXpq038')
 Geocode.setLanguage('en')
 Geocode.setLocationType('ROOFTOP')
@@ -12,7 +12,6 @@ const Form = () => {
   const [longitude, setLongitude] = useState('')
   const [latitude, setLatitude] = useState('')
   const ref = useRef()
-  let fullURL
 
   const onSelectChangeHandler = e => {
     const getDate = e.target.value
@@ -40,21 +39,17 @@ const Form = () => {
     )
   }
 
-  console.log(fullURL)
   console.log(input, date)
 
   return (
     <Fragment>
       <div className={classes.formContainer}>
         <form className={classes.form} onSubmit={onFormSubmitHandler}>
-          <label
-            className={classes.formLocationLabel}
-            for='location'
-            placeholder='Search by location for e.g Manchester'
-          >
+          <label className={classes.formLocationLabel} for='location'>
             Location
           </label>
           <input
+            placeholder='Search by location for e.g Manchester'
             className={classes.formLocationInput}
             id='location'
             ref={ref}
@@ -83,23 +78,15 @@ const Form = () => {
             <option value='2021-01'>Jan 2021</option>
             <option value='2021-02'>Feb 2020</option>
             <option value='2021-03'>Mar 2020</option>
-            <option value='2001-04'>Apr 2020</option>
+            <option value='2021-04'>Apr 2020</option>
             <option value='2021-05'>May 2020</option>
             <option value='2021-06'>Jun 2020</option>
           </select>
 
-          <button
-            className={classes.formButton}
-            fullURL={fullURL}
-            longitude={longitude}
-            latitude={latitude}
-            date={date}
-          >
-            Get Crime Report
-          </button>
+          <button className={classes.formButton}>Get Crime Report</button>
         </form>
       </div>
-      <PoliceApi />
+      <API longitude={longitude} latitude={latitude} date={date} />
     </Fragment>
   )
 }
