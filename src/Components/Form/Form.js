@@ -75,7 +75,6 @@ const Form = () => {
             <option value='2020-11'>Nov 2020</option>
             <option value='2020-12'>Dec 2020</option>
             <option value='2021-01'>Jan 2021</option>
-            <option value='2021-04'>Apr 2020</option>
             <option value='2021-02'>Feb 2021</option>
             <option value='2021-03'>Mar 2021</option>
             <option value='2021-04'>Apr 2021</option>
