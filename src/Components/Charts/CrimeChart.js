@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React, { Fragment} from 'react'
 import classes from './CrimeChart.module.css'
 
-const CrimeChart = API => {
-  const { A, B, C, D, E, F, G, H, I, J, K, L, M, N } = API
-  const total = A + B + C + D + E + F + G + H + I + J + K + L + M + N
+const CrimeChart = props => {
 
-  const letter = [A, B, C, D, E, F, G, H, I, J, K, L, M, N]
+
+  const letter = Object.values(props.crimes)
+  const total = letter.reduce((a, b) => a + b)
 
   let percentage = []
 
@@ -15,7 +15,8 @@ const CrimeChart = API => {
     num++
   }
 
-  console.log(total, A)
+  console.log(total)
+  console.log(letter)
 
   const width1 = { width: `${percentage[0]}%` }
   const width2 = { width: `${percentage[1]}%` }

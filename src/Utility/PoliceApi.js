@@ -1,50 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CrimeChart from '../Components/Charts/CrimeChart'
 
 const PoliceApi = ({ date, longitude, latitude }) => {
-  const [getCrimes, setGetCrimes] = useState([])
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
 
-  const urls = [
-    `https://data.police.uk/api/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/anti-social-behaviour?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/bicycle-theft?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/burglary?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/criminal-damage-arson?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/drugs?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/other-theft?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/possession-of-weapons?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/public-order?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/robbery?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/shoplifting?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/theft-from-the-person?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/vehicle-crime?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/violent-crime?lat=${latitude}&lng=${longitude}&date=${date}`,
-    `https://data.police.uk/api/other-crime?lat=${latitude}&lng=${longitude}&date=${date}`
-  ]
+  const crimes = {
+    'anti-social-behaviour': 0,
+    'bicycle-theft': 0,
+    burglary: 0,
+    'criminal-damage-arson': 0,
+    drugs: 0,
+    'other-theft': 0,
+    'possession-of-weapons': 0,
+    'public-order': 0,
+    robbery: 0,
+    shoplifting: 0,
+    'theft-from-the-person': 0,
+    'vehicle-crime': 0,
+    'violent-crime': 0,
+    'other-crime': 0
+  }
 
-  const url = urls.map(url => url)
+  let url = `https://data.police.uk/api/crimes-street/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`
+  console.log(date, longitude, latitude, url)
+  if (!date || !longitude || !latitude) {
+    url = ''
+  }
 
-  const getData = async () => {
-    const response = await fetch(url)
+  console.log(url)
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(url)
 
-    if (!response.ok) {
-      throw new Error('An error occured')
+      if (!response.ok) {
+        throw new Error('An error occured')
+      }
+
+      const data = await response.json()
+
+      const getCrime = []
+
+      for (let crimeSet of data) {
+        getCrime.push({ getCrime: crimeSet.category })
+      }
+
+      for (let crime of getCrime) {
+        crimes[crime.getCrime]++
+      }
+      console.log(crimes)
+
+     
     }
-
-    const data = await response.json()
-
-    setGetCrimes(data.length)
-    console.log(getCrimes)
-    setIsLoading(false)
-  }
-  try {
-    getData()
-  } catch (error) {
-    setIsLoading(false)
-    setDataError(error.message)
-  }
+ setIsLoading(false)
+    try {
+      getData()
+    } catch (error) {
+      setDataError(error.message)
+    }
+  }, [crimes, url])
 
   if (isLoading) {
     return (
@@ -62,11 +76,8 @@ const PoliceApi = ({ date, longitude, latitude }) => {
     )
   }
 
-  return (
-    <div>
-      <CrimeChart getCrimes={getCrimes} />
-    </div>
-  )
+
+  return <div>{crimes && !isLoading && <CrimeChart crimes={crimes} />}</div>
 }
 
 export default PoliceApi
