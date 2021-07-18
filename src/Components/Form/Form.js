@@ -46,7 +46,7 @@ const Form = () => {
     <Fragment>
       <div className={classes.formContainer}>
         <form className={classes.form} onSubmit={onFormSubmitHandler}>
-          <label className={classes.formLocationLabel} for='location'>
+          <label className={classes.formLocationLabel} htmlfor='location'>
             Location
           </label>
           <input
@@ -56,7 +56,7 @@ const Form = () => {
             id='location'
             ref={ref}
           ></input>
-          <label className={classes.formDateLabel} for='date'>
+          <label className={classes.formDateLabel} htmlfor='date'>
             Select Month
           </label>
           <select

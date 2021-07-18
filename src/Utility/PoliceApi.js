@@ -5,6 +5,7 @@ const PoliceApi = ({ date, longitude, latitude }) => {
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
   const [crimes, setCrimes] = useState({
+    total: 0,
     'anti-social-behaviour': 0,
     'bicycle-theft': 0,
     burglary: 0,
@@ -29,6 +30,7 @@ const PoliceApi = ({ date, longitude, latitude }) => {
 
   console.log(url)
   useEffect(() => {
+    if (!url) return
     const getData = async () => {
       const response = await fetch(url)
 
@@ -37,14 +39,33 @@ const PoliceApi = ({ date, longitude, latitude }) => {
       }
 
       const data = await response.json()
-
-      for (let crimeSet of data) {
-        crimes[crimeSet.category]++
-        console.log(crimeSet.category)
+      console.log(data)
+      const clone = {
+        total: 0,
+        'anti-social-behaviour': 0,
+        'bicycle-theft': 0,
+        burglary: 0,
+        'criminal-damage-arson': 0,
+        drugs: 0,
+        'other-theft': 0,
+        'possession-of-weapons': 0,
+        'public-order': 0,
+        robbery: 0,
+        shoplifting: 0,
+        'theft-from-the-person': 0,
+        'vehicle-crime': 0,
+        'violent-crime': 0,
+        'other-crime': 0
       }
-      console.log(crimes)
-
+      for (let crimeSet of data) {
+        clone[crimeSet.category]++
+      }
+      clone.total = Object.keys(clone).reduce(
+        (total, key) => total + clone[key],
+        0
+      )
       setIsLoading(false)
+      setCrimes(clone)
     }
 
     try {
@@ -52,7 +73,7 @@ const PoliceApi = ({ date, longitude, latitude }) => {
     } catch (error) {
       setDataError(error.message)
     }
-  }, [crimes, url])
+  }, [url])
 
   if (isLoading) {
     return (
