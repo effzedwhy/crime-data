@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import CrimeChart from '../Components/Charts/CrimeChart'
 
-const crimes = {
-  'anti-social-behaviour': 0,
-  'bicycle-theft': 0,
-  burglary: 0,
-  'criminal-damage-arson': 0,
-  drugs: 0,
-  'other-theft': 0,
-  'possession-of-weapons': 0,
-  'public-order': 0,
-  robbery: 0,
-  shoplifting: 0,
-  'theft-from-the-person': 0,
-  'vehicle-crime': 0,
-  'violent-crime': 0,
-  'other-crime': 0
-}
 const PoliceApi = ({ date, longitude, latitude }) => {
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
+  const [crimes, setCrimes] = useState({
+    'anti-social-behaviour': 0,
+    'bicycle-theft': 0,
+    burglary: 0,
+    'criminal-damage-arson': 0,
+    drugs: 0,
+    'other-theft': 0,
+    'possession-of-weapons': 0,
+    'public-order': 0,
+    robbery: 0,
+    shoplifting: 0,
+    'theft-from-the-person': 0,
+    'vehicle-crime': 0,
+    'violent-crime': 0,
+    'other-crime': 0
+  })
 
   let url = `https://data.police.uk/api/crimes-street/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`
   console.log(date, longitude, latitude, url)
@@ -38,14 +38,9 @@ const PoliceApi = ({ date, longitude, latitude }) => {
 
       const data = await response.json()
 
-      const getCrime = []
-
       for (let crimeSet of data) {
-        getCrime.push({ getCrime: crimeSet.category })
-      }
-
-      for (let crime of getCrime) {
-        crimes[crime.getCrime]++
+        crimes[crimeSet.category]++
+        console.log(crimeSet.category)
       }
       console.log(crimes)
 
@@ -77,7 +72,6 @@ const PoliceApi = ({ date, longitude, latitude }) => {
 
   return (
     <div>
-      {' '}
       <CrimeChart crimes={crimes} />
     </div>
   )

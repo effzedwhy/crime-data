@@ -4,6 +4,7 @@ import classes from './CrimeChart.module.css'
 const CrimeChart = props => {
 
   const letter = Object.values(props.crimes)
+  
   const total = letter.reduce((a, b) => a + b)
 console.log(props.crimes)
   let percentage = []
