@@ -1,7 +1,8 @@
 import React, { Fragment, useRef, useState } from 'react'
 import classes from './Form.module.css'
 import Geocode from 'react-geocode'
-import API from '../../Utility/API'
+
+import PoliceApi from '../../Utility/PoliceApi'
 Geocode.setApiKey('AIzaSyChf1wATZBL2PSzvuQxRZ1NkrMkiXpq038')
 Geocode.setLanguage('en')
 Geocode.setLocationType('ROOFTOP')
@@ -87,7 +88,7 @@ const Form = () => {
           </button>
         </form>
       </div>
-      <API longitude={longitude} latitude={latitude} date={date} />
+      <PoliceApi longitude={longitude} latitude={latitude} date={date} />
     </Fragment>
   )
 }

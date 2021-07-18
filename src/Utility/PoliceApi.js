@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import CrimeChart from '../Components/Charts/CrimeChart'
 
+const crimes = {
+  'anti-social-behaviour': 0,
+  'bicycle-theft': 0,
+  burglary: 0,
+  'criminal-damage-arson': 0,
+  drugs: 0,
+  'other-theft': 0,
+  'possession-of-weapons': 0,
+  'public-order': 0,
+  robbery: 0,
+  shoplifting: 0,
+  'theft-from-the-person': 0,
+  'vehicle-crime': 0,
+  'violent-crime': 0,
+  'other-crime': 0
+}
 const PoliceApi = ({ date, longitude, latitude }) => {
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
-
-  const crimes = {
-    'anti-social-behaviour': 0,
-    'bicycle-theft': 0,
-    burglary: 0,
-    'criminal-damage-arson': 0,
-    drugs: 0,
-    'other-theft': 0,
-    'possession-of-weapons': 0,
-    'public-order': 0,
-    robbery: 0,
-    shoplifting: 0,
-    'theft-from-the-person': 0,
-    'vehicle-crime': 0,
-    'violent-crime': 0,
-    'other-crime': 0
-  }
 
   let url = `https://data.police.uk/api/crimes-street/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`
   console.log(date, longitude, latitude, url)
@@ -50,9 +49,9 @@ const PoliceApi = ({ date, longitude, latitude }) => {
       }
       console.log(crimes)
 
-     
+      setIsLoading(false)
     }
- setIsLoading(false)
+
     try {
       getData()
     } catch (error) {
@@ -76,8 +75,12 @@ const PoliceApi = ({ date, longitude, latitude }) => {
     )
   }
 
-
-  return <div>{crimes && !isLoading && <CrimeChart crimes={crimes} />}</div>
+  return (
+    <div>
+      {' '}
+      <CrimeChart crimes={crimes} />
+    </div>
+  )
 }
 
 export default PoliceApi
