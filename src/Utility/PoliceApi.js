@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CrimeChart from '../Components/Charts/CrimeChart'
 
-const PoliceApi = ({ date, longitude, latitude }) => {
+const PoliceApi = ({ date, longitude, latitude, input }) => {
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
   const [crimes, setCrimes] = useState({
@@ -93,7 +93,7 @@ const PoliceApi = ({ date, longitude, latitude }) => {
 
   return (
     <div>
-      <CrimeChart crimes={crimes} />
+      <CrimeChart crimes={crimes} input={input} />
     </div>
   )
 }

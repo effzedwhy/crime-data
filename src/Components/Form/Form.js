@@ -12,11 +12,13 @@ const Form = () => {
   const [date, setDate] = useState('')
   const [longitude, setLongitude] = useState('')
   const [latitude, setLatitude] = useState('')
+  const [apiDate, setApiDate] = useState('')
   const ref = useRef()
 
   const onSelectChangeHandler = e => {
     const getDate = e.target.value
     setDate(getDate)
+    setApiDate(getDate)
   }
   const onFormSubmitHandler = e => {
     e.preventDefault()
@@ -32,7 +34,9 @@ const Form = () => {
         const { lat, lng } = response.results[0].geometry.location
         setLatitude(lat)
         setLongitude(lng)
-        console.log(date, lng, lat)
+        console.log(apiDate)
+        setApiDate('')
+        console.log(apiDate)
       },
       error => {
         console.error(error)
@@ -55,7 +59,6 @@ const Form = () => {
             className={classes.formLocationInput}
             id='location'
             ref={ref}
-          ></input>
           <label className={classes.formDateLabel} htmlfor='date'>
             Select Month
           </label>
@@ -80,15 +83,19 @@ const Form = () => {
             <option value='2021-03'>Mar 2021</option>
             <option value='2021-04'>Apr 2021</option>
             <option value='2021-05'>May 2021</option>
-            <option value='2021-06'>Jun 2020</option>
+            <option value='2021-06'>Jun 2021</option>
           </select>
-
           <button className={classes.formButton} value='submit'>
             Get Crime Report
           </button>
         </form>
       </div>
-      <PoliceApi longitude={longitude} latitude={latitude} date={date} />
+      <PoliceApi
+        longitude={longitude}
+        latitude={latitude}
+        date={apiDate}
+        input={input}
+      />
     </Fragment>
   )
 }

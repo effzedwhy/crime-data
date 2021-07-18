@@ -18,7 +18,7 @@ const labels = {
   'other-crime': 'Other Crime'
 }
 
-const CrimeChart = ({ crimes }) => {
+const CrimeChart = ({ crimes, input }) => {
   const { total, ...stats } = crimes
   const getPercent = value => (value / (total || 1)) * 100
   const getText = value => value.toFixed(0)
@@ -28,7 +28,9 @@ const CrimeChart = ({ crimes }) => {
     <Fragment>
       <div>
         <main>
-          <section id='skills'>
+      
+          <section id='skills'>    
+          <h2>{input}</h2>
             <article className={classes.skills}>
               {Object.keys(stats).map(key => (
                 <div className={classes['t-6']} key={key}>
