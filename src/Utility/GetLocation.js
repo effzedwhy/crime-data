@@ -5,10 +5,10 @@ Geocode.setApiKey('AIzaSyChf1wATZBL2PSzvuQxRZ1NkrMkiXpq038')
 Geocode.setLanguage('en')
 Geocode.setLocationType('ROOFTOP')
 
-const GetLocation = ({ location, date, input }) => {
+const GetLocation = ({ location, date }) => {
   const [longitude, setLongitude] = useState('')
   const [latitude, setLatitude] = useState('')
-  
+
   if (!location || !date) {
     return null
   }
@@ -28,7 +28,7 @@ const GetLocation = ({ location, date, input }) => {
       longitude={longitude}
       latitude={latitude}
       date={date}
-      input={input}
+      input={location}
     />
   )
 }

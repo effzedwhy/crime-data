@@ -23,13 +23,12 @@ const Form = () => {
     console.log(input)
   }
 
-  const inputBlurHandler = event => {
+  const inputBlurHandler = () => {
     setInputTouched(true)
   }
   const onFormSubmitHandler = e => {
     e.preventDefault()
     if (!enteredInputIsValid) {
-      //if empty
       return
     }
     console.log(input, date)
@@ -92,7 +91,7 @@ const Form = () => {
           </button> */}
         </form>
       </div>
-      <GetLocation location={input} date={apiDate} input={input} />
+      <GetLocation location={input} date={apiDate} />
     </Fragment>
   )
 }
