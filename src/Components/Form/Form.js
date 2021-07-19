@@ -1,64 +1,66 @@
 import React, { Fragment, useRef, useState } from 'react'
 import classes from './Form.module.css'
-import Geocode from 'react-geocode'
-
-import PoliceApi from '../../Utility/PoliceApi'
-Geocode.setApiKey('AIzaSyChf1wATZBL2PSzvuQxRZ1NkrMkiXpq038')
-Geocode.setLanguage('en')
-Geocode.setLocationType('ROOFTOP')
+import GetLocation from '../../Utility/GetLocation'
 
 const Form = () => {
   const [input, setInput] = useState('')
   const [date, setDate] = useState('')
-  const [longitude, setLongitude] = useState('')
-  const [latitude, setLatitude] = useState('')
   const [apiDate, setApiDate] = useState('')
-  const ref = useRef()
+  const [inputTouched, setInputTouched] = useState(false)
 
+  const ref = useRef()
+  const enteredInputIsValid = input.trim() !== '' //not empty
+  const nameInputIsInvalid = !enteredInputIsValid && inputTouched
   const onSelectChangeHandler = e => {
-    const getDate = e.target.value
-    setDate(getDate)
-    setApiDate(getDate)
+    setDate(e.target.value)
+    setApiDate(e.target.value)
+    console.log(apiDate)
+  }
+
+  const onChangeHandler = () => {
+    let input = ref.current.value
+    setInput(input)
+    console.log(input)
+  }
+
+  const inputBlurHandler = event => {
+    setInputTouched(true)
   }
   const onFormSubmitHandler = e => {
     e.preventDefault()
-    const input = ref.current.value
-
-    setInput(input)
-    console.log(input)
-
-    const location = input
-
-    Geocode.fromAddress(location).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location
-        setLatitude(lat)
-        setLongitude(lng)
-        console.log(apiDate)
-        setApiDate('')
-        console.log(apiDate)
-      },
-      error => {
-        console.error(error)
-      }
-    )
+    if (!enteredInputIsValid) {
+      //if empty
+      return
+    }
+    console.log(input, date)
   }
 
-  console.log(input, date)
+  const inputIsInvalid = nameInputIsInvalid
+    ? `${classes.formLocationInput} ${classes.invalid}`
+    : `${classes.formLocationInput} `
+
+  console.log(input, apiDate)
 
   return (
     <Fragment>
       <div className={classes.formContainer}>
+        <h1>Find out the category of crimes in your location</h1>
         <form className={classes.form} onSubmit={onFormSubmitHandler}>
           <label className={classes.formLocationLabel} htmlfor='location'>
             Location
           </label>
           <input
+            className={inputIsInvalid}
             type='text'
             placeholder='Search by location for e.g Manchester'
-            className={classes.formLocationInput}
             id='location'
+            onBlur={inputBlurHandler}
+            onChange={onChangeHandler}
             ref={ref}
+          ></input>
+          {nameInputIsInvalid && (
+            <p className='error-text'>Please enter a location.</p>
+          )}
           <label className={classes.formDateLabel} htmlfor='date'>
             Select Month
           </label>
@@ -85,17 +87,12 @@ const Form = () => {
             <option value='2021-05'>May 2021</option>
             <option value='2021-06'>Jun 2021</option>
           </select>
-          <button className={classes.formButton} value='submit'>
+          {/* <button className={classes.formButton} type='submit'>
             Get Crime Report
-          </button>
+          </button> */}
         </form>
       </div>
-      <PoliceApi
-        longitude={longitude}
-        latitude={latitude}
-        date={apiDate}
-        input={input}
-      />
+      <GetLocation location={input} date={apiDate} input={input} />
     </Fragment>
   )
 }

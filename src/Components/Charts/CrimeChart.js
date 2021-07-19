@@ -10,27 +10,26 @@ const labels = {
   'other-theft': 'Other Theft',
   'possession-of-weapons': 'Posession Of Weapons',
   'public-order': 'Public Order',
-  robbery: 'Roberry',
+  robbery: 'Robbery',
   shoplifting: 'Shoplifting',
   'theft-from-the-person': 'Theft From The Person',
   'vehicle-crime': 'Vehicle Crime',
-  'violent-crime': 'Voilent Crime',
+  'violent-crime': 'Violent Crime',
   'other-crime': 'Other Crime'
 }
 
 const CrimeChart = ({ crimes, input }) => {
   const { total, ...stats } = crimes
   const getPercent = value => (value / (total || 1)) * 100
-  const getText = value => value.toFixed(0)
+  const getText = value => Math.round(value.toFixed(0))
   console.log(crimes)
 
   return (
     <Fragment>
       <div>
         <main>
-      
-          <section id='skills'>    
-          <h2>{input}</h2>
+          <section id='skills'>
+            <h2>{input}</h2>
             <article className={classes.skills}>
               {Object.keys(stats).map(key => (
                 <div className={classes['t-6']} key={key}>
