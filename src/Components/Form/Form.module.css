@@ -49,3 +49,13 @@ input {
 .invalid {
   border: 1px solid red;
 }
+
+@media (max-width: 600px) {
+  .formContainer > h1 {
+    font-size: 1.5rem;
+    margin: 10%;
+  }
+  .form {
+    width: 80%;
+  }
+}
