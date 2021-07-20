@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 const Form = () => {
   const [input, setInput] = useState('')
-  const [date, setDate] = useState('')
+
   const [apiDate, setApiDate] = useState('')
 
   const {
@@ -24,7 +24,6 @@ const Form = () => {
   })
 
   const onSubmit = () => {
-    setDate(getValues('date'))
     setApiDate(getValues('date'))
     setInput(getValues('location'))
     reset({ location: '', date: '' })
