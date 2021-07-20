@@ -65,7 +65,7 @@ const Form = () => {
               required: true,
               validate: value => {
                 if (!value) {
-                  return 'Please select month'
+                  return 'Please select a month'
                 }
                 return true
               }
