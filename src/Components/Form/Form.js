@@ -43,6 +43,7 @@ const Form = () => {
             className={classes.formLocationInput}
             type='text'
             placeholder='Search by location for e.g Manchester'
+            aria-required='true'
             {...register('location', {
               required: true,
               validate: value => {
@@ -61,6 +62,8 @@ const Form = () => {
           </label>
           <select
             className={classes.formDateSelect}
+            aria-labelledby='Pick a date'
+            aria-required='true'
             {...register('date', {
               required: true,
               validate: value => {
