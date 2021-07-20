@@ -42,13 +42,13 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
 
       console.log(url)
       const data = await response.json()
-      if (!Object.keys(data)) {
-        return (
-          <div>
-            <p>No Results Found</p>
-          </div>
-        )
-      }
+      //   if (!data.length) {
+      //     return (
+      //       <div>
+      //         <p>No Results Found</p>
+      //       </div>
+      //     )
+      //   }
       console.log(data)
       const clone = {
         total: 0,
@@ -106,7 +106,7 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
 
   return (
     <div>
-      <CrimeChart crimes={crimes} input={input} />
+      <CrimeChart crimes={crimes} input={input} date={date} />
     </div>
   )
 }

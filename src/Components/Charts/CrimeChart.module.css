@@ -22,7 +22,6 @@ main {
   width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 section {
   background: #e2e2e2;
@@ -34,6 +33,10 @@ section {
 }
 section > h2 {
   text-transform: capitalize;
+  margin-bottom: 5px;
+}
+section > h3 {
+  margin-top: 5px;
 }
 section article.skills {
   width: 500px;

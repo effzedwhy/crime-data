@@ -1,42 +1,34 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import classes from './Form.module.css'
 import GetLocation from '../../Utility/GetLocation'
+import { useForm } from 'react-hook-form'
 
 const Form = () => {
   const [input, setInput] = useState('')
   const [date, setDate] = useState('')
   const [apiDate, setApiDate] = useState('')
-  const [inputTouched, setInputTouched] = useState(false)
 
-  const ref = useRef()
-  const enteredInputIsValid = input.trim() !== '' //not empty
-  const nameInputIsInvalid = !enteredInputIsValid && inputTouched
-  const onSelectChangeHandler = e => {
-    setDate(e.target.value)
-    setApiDate(e.target.value)
-    console.log(apiDate)
-  }
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    trigger,
+    reset,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      location: '',
+      date: ''
+    },
+    criteriaMode: 'all'
+  })
 
-  const onChangeHandler = () => {
-    let input = ref.current.value
-    setInput(input)
-    console.log(input)
+  const onSubmit = () => {
+    setDate(getValues('date'))
+    setApiDate(getValues('date'))
+    setInput(getValues('location'))
+    reset({ location: '', date: '' })
   }
-
-  const inputBlurHandler = () => {
-    setInputTouched(true)
-  }
-  const onFormSubmitHandler = e => {
-    e.preventDefault()
-    if (!enteredInputIsValid) {
-      return
-    }
-    console.log(input, date)
-  }
-
-  const inputIsInvalid = nameInputIsInvalid
-    ? `${classes.formLocationInput} ${classes.invalid}`
-    : `${classes.formLocationInput} `
 
   console.log(input, apiDate)
 
@@ -44,30 +36,41 @@ const Form = () => {
     <Fragment>
       <div className={classes.formContainer}>
         <h1>Find out the category of crimes in your location</h1>
-        <form className={classes.form} onSubmit={onFormSubmitHandler}>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <label className={classes.formLocationLabel} htmlfor='location'>
             Location
           </label>
           <input
-            className={inputIsInvalid}
+            className={classes.formLocationInput}
             type='text'
             placeholder='Search by location for e.g Manchester'
-            id='location'
-            onBlur={inputBlurHandler}
-            onChange={onChangeHandler}
-            ref={ref}
+            {...register('location', {
+              required: true,
+              validate: value => {
+                if (!value) {
+                  return 'Please enter a location'
+                }
+                return true
+              }
+            })}
           ></input>
-          {nameInputIsInvalid && (
-            <p className='error-text'>Please enter a location.</p>
+          {errors.location && (
+            <p className={classes.error}>{errors.location.types.validate}</p>
           )}
           <label className={classes.formDateLabel} htmlfor='date'>
             Select Month
           </label>
           <select
             className={classes.formDateSelect}
-            id='date'
-            onChange={onSelectChangeHandler}
-            value={date}
+            {...register('date', {
+              required: true,
+              validate: value => {
+                if (!value) {
+                  return 'Please select month'
+                }
+                return true
+              }
+            })}
           >
             <option value=''>Select</option>
 
@@ -86,9 +89,18 @@ const Form = () => {
             <option value='2021-05'>May 2021</option>
             <option value='2021-06'>Jun 2021</option>
           </select>
-          {/* <button className={classes.formButton} type='submit'>
+          {errors.date && (
+            <p className={classes.error}>{errors.date.types.validate}</p>
+          )}
+          <button
+            className={classes.formButton}
+            type='submit'
+            onClick={() => {
+              trigger()
+            }}
+          >
             Get Crime Report
-          </button> */}
+          </button>
         </form>
       </div>
       <GetLocation location={input} date={apiDate} />

@@ -18,11 +18,35 @@ const labels = {
   'other-crime': 'Other Crime'
 }
 
-const CrimeChart = ({ crimes, input }) => {
+const CrimeChart = ({ crimes, input, date }) => {
   const { total, ...stats } = crimes
   const getPercent = value => (value / (total || 1)) * 100
   const getText = value => Math.round(value.toFixed(0))
   console.log(crimes)
+
+  const months = {
+    '01': 'January',
+    '02': 'Feburary',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+  }
+
+  const selectedMonth = date.slice(5)
+  const dateText = Object.keys(months).map(month =>
+    month === selectedMonth ? Object.values(months[month]) : null
+  )
+
+  const year = date.slice(0, 4)
+
+  console.log(dateText)
 
   return (
     <Fragment>
@@ -30,20 +54,29 @@ const CrimeChart = ({ crimes, input }) => {
         <main>
           <section id='skills'>
             <h2>{input}</h2>
-            <article className={classes.skills}>
-              {Object.keys(stats).map(key => (
-                <div className={classes['t-6']} key={key}>
-                  <p>
-                    {getText(getPercent(stats[key]))}% - {labels[key]}
-                    <span></span>
-                    <span
-                      style={{ width: getPercent(stats[key]) + '%' }}
-                      className={classes.skills}
-                    ></span>
-                  </p>
-                </div>
-              ))}
-            </article>
+            <h3>
+              {dateText}
+              &nbsp;
+              {year}
+            </h3>
+            {crimes.total === 0 ? (
+              <p>No results found.</p>
+            ) : (
+              <article className={classes.skills}>
+                {Object.keys(stats).map(key => (
+                  <div className={classes['t-6']} key={key}>
+                    <p>
+                      {getText(getPercent(stats[key]))}% - {labels[key]}
+                      <span></span>
+                      <span
+                        style={{ width: getPercent(stats[key]) + '%' }}
+                        className={classes.skills}
+                      ></span>
+                    </p>
+                  </div>
+                ))}
+              </article>
+            )}
           </section>
         </main>
       </div>
