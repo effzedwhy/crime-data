@@ -29,8 +29,6 @@ const Form = () => {
     reset({ location: '', date: '' })
   }
 
-  console.log(input, apiDate)
-
   return (
     <Fragment>
       <div className={classes.formContainer}>
