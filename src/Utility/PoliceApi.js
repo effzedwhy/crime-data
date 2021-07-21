@@ -42,14 +42,7 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
 
       console.log(url)
       const data = await response.json()
-      //   if (!data.length) {
-      //     return (
-      //       <div>
-      //         <p>No Results Found</p>
-      //       </div>
-      //     )
-      //   }
-      console.log(data)
+    
       const clone = {
         total: 0,
         'anti-social-behaviour': 0,
@@ -84,7 +77,6 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
       getData()
     } catch (error) {
       setDataError(error.message)
-      console.log(dataError)
     }
   }, [url, dataError])
 
