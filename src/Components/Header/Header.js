@@ -5,8 +5,7 @@ const Header = () => {
   return (
     <header>
       <h2 className={classes.title}>Police Crime Report</h2>
-      <nav></nav>
-    </header>
+        </header>
   )
 }
 export default Header
