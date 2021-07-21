@@ -22,7 +22,6 @@ const GetLocation = ({ location, date }) => {
       console.error(error)
     }
   )
-  console.log(date)
   return (
     <PoliceApi
       longitude={longitude}
