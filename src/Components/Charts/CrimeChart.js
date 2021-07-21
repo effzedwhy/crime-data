@@ -22,7 +22,6 @@ const CrimeChart = ({ crimes, input, date }) => {
   const { total, ...stats } = crimes
   const getPercent = value => (value / (total || 1)) * 100
   const getText = value => Math.round(value.toFixed(0))
-  console.log(crimes)
 
   const months = {
     '01': 'January',
@@ -45,8 +44,6 @@ const CrimeChart = ({ crimes, input, date }) => {
   )
 
   const year = date.slice(0, 4)
-
-  console.log(dateText)
 
   return (
     <Fragment>
