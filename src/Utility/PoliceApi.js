@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CrimeChart from '../Components/Charts/CrimeChart'
 
 const PoliceApi = ({ date, longitude, latitude, input }) => {
-  console.log(date)
+  
   const [dataError, setDataError] = useState()
   const [isLoading, setIsLoading] = useState()
   const [crimes, setCrimes] = useState({
@@ -24,13 +24,11 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
   })
 
   let url = `https://data.police.uk/api/crimes-street/all-crime?lat=${latitude}&lng=${longitude}&date=${date}`
-  console.log(date, longitude, latitude, url)
 
   if (!date || !longitude || !latitude) {
     url = ''
   }
 
-  console.log(url)
   useEffect(() => {
     if (!url) return
     const getData = async () => {
@@ -40,7 +38,7 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
         throw new Error('An error occured')
       }
 
-      console.log(url)
+   
       const data = await response.json()
     
       const clone = {
