@@ -37,8 +37,7 @@ const PoliceApi = ({ date, longitude, latitude, input }) => {
       if (!response.ok) {
         throw new Error('An error occured')
       }
-
-   
+ 
       const data = await response.json()
     
       const clone = {
